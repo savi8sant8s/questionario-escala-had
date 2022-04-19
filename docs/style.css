@@ -1,0 +1,21 @@
+/* 
+PALETA temporária
+
+Azul escuro Primário #11296B
+Azul claro Secundário #1E96FC  
+Branco fundo #EDEDED 
+Amarelo Primário #FFCB05
+Amarelo claro Secundário #FFDB57
+ */
+
+button {
+    background-color: #1E96FC; 
+    border: none;
+    border-radius: 2px;
+    color: #EDEDED;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
