@@ -130,21 +130,45 @@ const app = new Vue({
                     ],
                 }
             ],
-            respostas: [null,null],
-        }
+            respostas: [],
+            observacao: [],
+        }                
     },
     methods: {
         calcularResultado(){
-            const valorInicial = 0;
-            return this.respostas.reduce((acumulador, resposta) => {
-                return acumulador + resposta;
-            }, valorInicial);
+            let ansiedade = 0;
+            let depressao = 0;
+            for(let i = 0; i < this.respostas.length; i++){
+
+                if(i % 2 === 0){
+                   ansiedade = ansiedade + this.respostas[i]
+                }
+                else{
+                    depressao = depressao + this.respostas[i]
+                } 
+            }
+            return  resultado = [ansiedade, depressao];
         },
-        calcularObservacao(resultado){
-            if (resultado <= 2) {
-                return 'Libélula';
-            } else {
-                return 'Vagalume';
+        calcularAnsiedade(resultado){
+            if (resultado[0] <= 7) {
+                return 'improvável';
+            }
+            else if (resultado[0] > 7 && resultado[0] <= 11) {
+                return 'possível';
+            }
+            else {
+                return 'provável';
+            }
+        },
+        calcularDepressao(resultado){
+            if(resultado[1] <= 7){
+                return 'improvavel'
+            }
+            else if (resultado[1] > 7 && resultado[1] <= 11) {
+                return 'possível';
+            }
+            else {
+                return 'provável';
             }
         },
         zerarRespostas(){
@@ -152,8 +176,17 @@ const app = new Vue({
         },
         mostrarResultado(){
             const resultado = this.calcularResultado();
-            const observacao = this.calcularObservacao(resultado);
-            alert('Observacao: ' + observacao);
-        }
+            this.observacao = [this.calcularAnsiedade(resultado), this.calcularDepressao(resultado)];
+            alert('Observacao: ' + this.observacao + '[' + resultado +']');
+            let div = document.querySelector('.resultado');
+            let btn = document.querySelector('.botao-calcular');
+            if (div.style.display === 'block') {
+                div.style.display = 'none';
+                btn.style.display = 'block';
+            } else {
+                div.style.display = 'block';
+                btn.style.display = 'none';
+            }
+        },
     }
 })

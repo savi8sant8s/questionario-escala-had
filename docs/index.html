@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,18 +8,26 @@
     <title>Escala HAD - Avaliação do Nível de Ansiedade e Depressão</title>
     <link href="style.css" rel="stylesheet" type="text/css">
 </head>
+
 <body>
     <div id="app">
-        <div v-for="(questao, index) in questoes" id=`questao-${id}`>
-            <h3>{{questao.pergunta}}</h3>
-            <div v-for="alternativa in questao.alternativas">
-                <input type="radio":value="alternativa.valor" v-model="respostas[index]">
-                <label>{{alternativa.descricao}}</label>
+        <div class="questoes" id="questoes" v-for="(questao, index) in questoes" id=`questao-${id}`>
+            <h3 class="questao" >{{index + 1}}- {{questao.pergunta}}</h3>
+            <div class="alternativas" v-for="alternativa in questao.alternativas">
+                <input class="radio" type="radio" :value="alternativa.valor" v-model="respostas[index]" checked>
+                <label class="descricao"><strong>{{alternativa.descricao}}</strong></label>                
             </div>
         </div>
-        <button style="margin-top: 1rem;" @click="mostrarResultado">Calcular resultado</button>
-    </div>  
+        <button class="botao-calcular" @click="mostrarResultado">Calcular resultado</button>
+        <div class="resultado" id="resultado">
+            <h3>Resultado:</h3>
+            <p>
+                De acordo com suas respostas, é <strong>{{observacao[0]}}</strong> que você tenha ansiedade. Bem como, é <strong>{{observacao[1]}}</strong> que você tenha depressão.
+            </p>
+        </div>
+    </div>
     <script src="./vue.min.js"></script>
     <script src="./script.js"></script>
 </body>
+
 </html>
