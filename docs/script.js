@@ -177,7 +177,7 @@ const app = new Vue({
         mostrarResultado(){
             const resultado = this.calcularResultado();
             this.observacao = [this.calcularAnsiedade(resultado), this.calcularDepressao(resultado)];
-            alert('Observacao: ' + this.observacao + '[' + resultado +']');
+            //alert('Observacao: ' + this.observacao + '[' + resultado +']');
             let div = document.querySelector('.resultado');
             let btn = document.querySelector('.botao-calcular');
             if (div.style.display === 'block') {
@@ -186,6 +186,18 @@ const app = new Vue({
             } else {
                 div.style.display = 'block';
                 btn.style.display = 'none';
+            }
+        },
+        toggleButton() {
+            let total = 0;
+            for (let i = 0; i < this.respostas.length; i++) {
+                if (this.respostas[i] !== undefined) {  //checa se não tem nenhum espaço vazio no array
+                    total = total + 1; //conta quantos itens (respostas) tem no array
+                }
+            }
+            if (total === this.questoes.length) { // checa se o total de respostas é igual ao total de questões
+                document.querySelector('.botao-calcular').disabled=false;
+                return
             }
         },
     }

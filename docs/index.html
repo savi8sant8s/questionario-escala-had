@@ -13,12 +13,12 @@
     <div id="app">
         <div class="questoes" id="questoes" v-for="(questao, index) in questoes" id=`questao-${id}`>
             <h3 class="questao" >{{index + 1}}- {{questao.pergunta}}</h3>
-            <div class="alternativas" v-for="alternativa in questao.alternativas">
-                <input class="radio" type="radio" :value="alternativa.valor" v-model="respostas[index]" checked>
-                <label class="descricao"><strong>{{alternativa.descricao}}</strong></label>                
+            <div class="alternativas" id="alternativas" v-for="alternativa in questao.alternativas">
+                <input class="radio" type="radio" :value="alternativa.valor" v-model="respostas[index]" @change="toggleButton()">
+                <label class="descricao"><strong>{{alternativa.descricao}}</strong></label>
             </div>
         </div>
-        <button class="botao-calcular" @click="mostrarResultado">Calcular resultado</button>
+        <button class="botao-calcular" id="calcular" @click="mostrarResultado()" disabled>Ver resultado</button>
         <div class="resultado" id="resultado">
             <h3>Resultado:</h3>
             <p>
